@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<main class="container">
+    <h1 class="dashboard-title">Dashboard</h1>
+    <p class="dashboard-welcome">Welcome {{ user.username }} | {{ user.email }}</p>
+    <a href="/users/logout" class="button logout-button">Logout</a>
+</main>
+
+{% endblock %}

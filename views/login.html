@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<main class="container">
+    <!-- <button class="primary"><a href="/auth/google">Login with Google</a></button> -->
+    <a type="button" class="login-with-google-btn" href="/auth/google" >
+        Sign in with Google
+    </a>
+    <center style="text-align: center;">or</center>
+    <form action="/auth/login" method="POST">
+        <h1>Login</h1>
+        <hr>
+        <fieldset>
+            <label>
+                Email
+                <input type="email" name="email" placeholder="Email" autocomplete="email" />
+            </label>
+            <label>
+                Password
+                <input name="password" placeholder="Password" type="password" />
+            </label>
+        </fieldset>
+
+        <input type="submit" value="Login" />
+    </form>
+    <hr>
+    <small>Don't have an Account? <a href="/register">Register</a></small>
+</main>
+{% endblock %}

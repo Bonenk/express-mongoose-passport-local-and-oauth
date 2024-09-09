@@ -1,0 +1,25 @@
+{% if errors %}
+  {% for error in errors %}
+    <div class="container alert alert-warning" role="alert">
+      {{ error.msg }}
+    </div>
+  {% endfor %}
+{% endif %}
+
+{% if success_msg %}
+  <div class="container alert alert-success" role="alert">
+    {{ success_msg }}
+  </div>
+{% endif %}
+
+{% if error_msg %}
+  <div class="container alert alert-danger" role="alert">
+    {{ error_msg }}
+  </div>
+{% endif %}
+
+{% if error %}
+  <div class="container alert alert-danger" role="alert">
+    {{ error }}
+  </div>
+{% endif %}
