@@ -9,6 +9,22 @@ import authRoutes from "./routes/auth.js";
 import dotenv from 'dotenv';
 dotenv.config();
 
+import MongoDBStore from 'connect-mongodb-session';
+
+
+// Create a new MongoDBStore instance
+const MongoDBStoreInstance = MongoDBStore(session);
+
+const store = new MongoDBStoreInstance({
+  uri: process.env.MONGO_URI,
+  collection: 'sessions'
+});
+
+// Handle errors
+store.on('error', function(error) {
+  console.error(error);
+});
+
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
@@ -32,8 +48,12 @@ mongoose
 app.use(
   session({
     secret: "jashbd*(&(*7q3wjkkjahdsk",
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24 * 30 // 30 days
+    },
     resave: true,
     saveUninitialized: true,
+    store: store
   })
 );
 
@@ -41,7 +61,7 @@ app.use(
 import configurePassport from './config/passport.js';
 configurePassport(passport);
 app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.session());
 
 // Connect flash messages
 app.use(flash());
